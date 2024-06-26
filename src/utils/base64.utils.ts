@@ -1,7 +1,6 @@
 /**
  *base64加解密
  */
-
 export default class Base64 {
   public static readonly Instance: Base64 = new Base64();
   private _keyStr: string;

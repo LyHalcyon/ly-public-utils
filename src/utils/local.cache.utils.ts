@@ -38,4 +38,7 @@ class localCacheUtil {
   }
 }
 
+/**
+ * localStorage 数据存储工具类
+ */
 export default new localCacheUtil();
