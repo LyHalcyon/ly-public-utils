@@ -1,11 +1,22 @@
 {
   "name": "ly-public-utils",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.0.4",
   "type": "module",
-  "types": "lib/main.d.ts",
-  "main": "dist/ly_utils.cjs",
-  "module": "dist/ly_utils.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc -p tsconfig.build.json",
