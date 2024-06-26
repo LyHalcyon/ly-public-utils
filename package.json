@@ -1,7 +1,8 @@
 {
   "name": "ly-public-utils",
   "private": false,
-  "version": "0.0.7",
+  "version": "0.0.9",
+  "author": "ly_halcyon",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.cjs",
@@ -28,5 +29,15 @@
     "prettier": "^3.3.2",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
-  }
+  },
+  "keywords": [
+    "ly",
+    "ly_halcyon",
+    "ly-public-utils",
+    "utils",
+    "formatDate",
+    "localStorage",
+    "base64"
+  ],
+  "license": "MIT"
 }
