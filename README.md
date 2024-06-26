@@ -7,7 +7,7 @@
 ```javascript
 import { formatDate } from 'ly-public-utils';
 
-formatDate(new Date(), 'YMD') // 2022-12-12
+formatDate(new Date(), 'YYYY-MM-DD') // 2022-12-12
 ```
 
 `Base64` base64格式数据加密、解密<br />
@@ -16,11 +16,11 @@ formatDate(new Date(), 'YMD') // 2022-12-12
 ```javascript
 import { Base64 } from 'ly-public-utils';
 
-let str = '1123';
+let pwd = '123456';
 //加密
-const base64 = new Base64().base64_encode(str);
+const base64 = new Base64().base64_encode(pwd);
 //解密
-str = new Base64().base64_decode(base64);
+pwd = new Base64().base64_decode(base64);
 ```
 
 `localStorage` 数据持久化存储<br />

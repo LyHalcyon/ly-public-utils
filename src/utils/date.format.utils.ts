@@ -6,11 +6,20 @@ export function padZero(num: number): string {
 /**
  * 格式化时间
  * @param date 时间
- * @param returnDateType YMD:年月日 YM:年月 Y:年 M:月 D:日 HMS:时分秒 HM:时分
+ * @param returnDateType YYYY-MM-DD:年-月-日 YYYY-MM:年-月 YYYY:年 MM:月 DD:日 MM-DD:月-日 hh:mm:ss:时分秒 hh:mm:时分
  */
 export function formatDate(
   date: Date,
-  returnDateType?: 'YMD' | 'YM' | 'Y' | 'M' | 'D' | 'HMS' | 'HM'
+  returnDateType?:
+    | 'YYYY-MM-DD'
+    | 'YYYY-MM'
+    | 'YYYY'
+    | 'MM'
+    | 'DD'
+    | 'MM-DD'
+    | 'MM-DD hh:mm'
+    | 'hh:mm:ss'
+    | 'hh:mm'
 ): string {
   const year: number = date.getFullYear();
   const month: string = padZero(date.getMonth() + 1);
@@ -21,25 +30,31 @@ export function formatDate(
   let timeString: string = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 
   switch (returnDateType) {
-    case 'YMD':
+    case 'YYYY-MM-DD':
       timeString = `${year}-${month}-${day}`;
       break;
-    case 'YM':
+    case 'YYYY-MM':
       timeString = `${year}-${month}`;
       break;
-    case 'Y':
+    case 'YYYY':
       timeString = `${year}`;
       break;
-    case 'M':
+    case 'MM':
       timeString = `${month}`;
       break;
-    case 'D':
+    case 'DD':
       timeString = `${day}`;
       break;
-    case 'HMS':
+    case 'MM-DD':
+      timeString = `${month}-${day}`;
+      break;
+    case 'MM-DD hh:mm':
+      timeString = `${month}-${day} ${hour}:${minute}`;
+      break;
+    case 'hh:mm:ss':
       timeString = `${hour}:${minute}:${second}`;
       break;
-    case 'HM':
+    case 'hh:mm':
       timeString = `${hour}:${minute}`;
       break;
     default:
