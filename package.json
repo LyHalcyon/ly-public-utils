@@ -12,6 +12,9 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@rushstack/eslint-patch": "^1.10.3",
+    "@types/node": "^20.14.9",
+    "prettier": "^3.3.2",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
   }
