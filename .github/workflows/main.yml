@@ -1,11 +1,11 @@
-name: Publish Package to npmjs
+name: Publish Package to npmJs
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
     tags:
       - 'v*'
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
