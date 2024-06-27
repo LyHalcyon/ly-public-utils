@@ -1,4 +1,7 @@
-export default {
+/**
+ * 默认常见小工具
+ */
+const defaultUtils = {
   /**
    * 手机号校验
    * @param num
@@ -607,3 +610,7 @@ export default {
     });
   }
 };
+/**
+ * 默认常见小工具
+ */
+export default defaultUtils;
