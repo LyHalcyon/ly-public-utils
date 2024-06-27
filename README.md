@@ -60,7 +60,7 @@ import { flattenArray } from 'ly-public-utils';
 flattenArray([1, 2, 3, [2, 5], 6, [7, 8, [9, 10]]]) //[1, 2, 3, 2, 5, 6, 7, 8, 9, 10]
 ```
 
-`flattenArray` 数组打平<br />
+`buildTree` 构建树形结构的数组对象<br />
 例：
 
 ```javascript
