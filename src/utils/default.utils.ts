@@ -1,3 +1,8 @@
+function checkFileName(fileName: string, list: any) {
+  let name = fileName.toLowerCase();
+  return list.some((i: any) => name.endsWith(`.${i}`));
+}
+
 /**
  * 默认常见小工具
  */
@@ -608,6 +613,41 @@ const defaultUtils = {
     return num.toString().replace(/\d+/, function (s) {
       return s.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
     });
+  },
+  /**
+   * 检测文件名是否为图片
+   * @param fileName
+   */
+  isImage(fileName: string) {
+    return checkFileName(fileName, ['png', 'jpeg', 'jpg', 'png', 'bmp']);
+  },
+  /**
+   * 检测文件名是否为视频
+   * @param fileName
+   */
+  isH5Video(fileName: string) {
+    return checkFileName(fileName, ['mp4', 'webm', 'ogg']);
+  },
+  /**
+   * 检测文件名是否为PDF
+   * @param fileName
+   */
+  isPdf(fileName: string) {
+    return checkFileName(fileName, ['pdf']);
+  },
+  /**
+   * 检测文件名是否为word
+   * @param fileName
+   */
+  isWord(fileName: string) {
+    return checkFileName(fileName, ['doc', 'docx']);
+  },
+  /**
+   * 检测文件名是否为excel
+   * @param fileName
+   */
+  isExcel(fileName: string) {
+    return checkFileName(fileName, ['xlsx', 'xls', 'xlsm', 'xlsb', 'csv']);
   }
 };
 /**
