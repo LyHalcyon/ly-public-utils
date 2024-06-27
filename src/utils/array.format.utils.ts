@@ -47,8 +47,10 @@ export function deepCopy(obj: any, visited?: WeakMap<any, any>): any {
 
 /**
  * 数组打平
+ * @param arr 数据数组
+ * @param unique 是否去重，默认不去重
  */
-export function flattenArray(arr: any[]): any[] {
+export function flattenArray(arr: any[], unique: boolean = false): any[] {
   const result: any[] = [];
 
   arr.forEach((item) => {
@@ -58,8 +60,12 @@ export function flattenArray(arr: any[]): any[] {
       result.push(item);
     }
   });
-
-  return result;
+  // 如果 unique 为 true，则对结果数组进行去重处理
+  if (unique) {
+    return Array.from(new Set(result));
+  } else {
+    return result;
+  }
 }
 
 /**
