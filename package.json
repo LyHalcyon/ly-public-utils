@@ -1,7 +1,7 @@
 {
   "name": "ly-public-utils",
   "private": false,
-  "version": "0.0.20",
+  "version": "0.0.21",
   "author": "LyHalcyon",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -34,10 +34,13 @@
     "ly",
     "LyHalcyon",
     "ly-public-utils",
+    "ly-utils",
+    "public-utils",
     "utils",
     "formatDate",
     "localStorage",
-    "base64"
+    "base64",
+    "defaultUtils"
   ],
   "license": "MIT",
   "homepage": "https://github.com/LyHalcyon/ly-public-utils",
