@@ -7,7 +7,7 @@ export default {
     return /^1[2,3,4,5,7,8]\d{9}$/.test(num);
   },
   /**
-   * 手机号码中间4位隐藏花号（*）显示
+   * 手机号码只显示开始3位和结尾4位，其余使用****
    * @param mobile
    */
   hideMobile(mobile: string) {
