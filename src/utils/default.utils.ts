@@ -7,6 +7,13 @@ export default {
     return /^1[2,3,4,5,7,8]\d{9}$/.test(num);
   },
   /**
+   * 手机号码中间4位隐藏花号（*）显示
+   * @param mobile
+   */
+  hideMobile(mobile: string) {
+    return mobile.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2');
+  },
+  /**
    * 中英文姓名校验
    * @param name
    */
@@ -84,6 +91,24 @@ export default {
   isVehicle(vehicle: any) {
     let patrn = /^[A-HJ-NP-Za-hj-np-z0-9]+$/;
     return !(!patrn.test(vehicle) || vehicle === '');
+  },
+  /*
+   * 验证是否为数字
+   */
+  isNumber(n: any) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  },
+  /*
+   * 是否为数组
+   */
+  isArray(obj: any) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+  },
+  /*
+   * 是否空数组
+   */
+  isArrayEmpty(val: any) {
+    return !(val && val instanceof Array && val.length > 0);
   },
   /**
    * 判断是否为PC端
@@ -257,11 +282,23 @@ export default {
     }
   },
   /**
-   * 首尾去空格
-   * @param str
+   * 去除字符串空格
+   * @param str 要处理的字符串
+   * @param type 1：所有空格 2：前后空格 3：前空格 4：后空格
    */
-  trim(str: any) {
-    return str.replace(/(^\s*)|(\s*$)/g, '');
+  strTrim(str: string, type: 1 | 2 | 3 | 4) {
+    switch (type) {
+      case 1:
+        return str.replace(/\s+/g, '');
+      case 2:
+        return str.replace(/(^\s*)|(\s*$)/g, '');
+      case 3:
+        return str.replace(/(^\s*)/g, '');
+      case 4:
+        return str.replace(/(\s*$)/g, '');
+      default:
+        return str;
+    }
   },
   /**
    * 将某个元素置顶
@@ -378,5 +415,195 @@ export default {
    */
   minArr(arr: any) {
     return Math.min.apply(null, arr);
+  },
+  /**
+   * 判断数据类型
+   * @param {any} val - 基本类型数据或者引用类型数据
+   * @return {string} - 可能返回的结果有，均为小写字符串
+   * number、boolean、string、null、undefined、array、object、function等
+   */
+  getType(val: any) {
+    //判断数据是 null 和 undefined 的情况
+    if (val == null) {
+      return val + '';
+    }
+    return typeof val === 'object'
+      ? Object.prototype.toString.call(val).slice(8, -1).toLowerCase()
+      : typeof val;
+  },
+  /**
+   * 去除参数空数据（用于向后台传递参数的时候）
+   * @param obj
+   */
+  filterEmptyData(obj: any) {
+    for (let prop in obj) {
+      obj[prop] === '' ? delete obj[prop] : obj[prop];
+    }
+    return obj;
+  },
+  /**
+   * @desc  函数防抖，用于将多次执行变为最后一次执行
+   * @param  fun - 需要使用函数防抖的被执行的函数。必传
+   * @param  delay - 多少毫秒之内触发，只执行第一次，默认1000ms。可以不传
+   */
+  debounce(fun: any, delay: any) {
+    delay = delay || 1000; //默认1s后执行
+    let timer: any = null;
+    return function (this: any, ...args: any) {
+      const context = this;
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        fun.apply(context, args);
+      }, delay);
+    };
+  },
+  /**
+   * 节流函数, 用于将多次执行变为每隔一段时间执行
+   * @param fun 事件触发的操作
+   * @param delay 间隔多少毫秒需要触发一次事件
+   */
+  throttle(fun: any, delay: any) {
+    let timer: any = null;
+    return function (this: any, ...args: any) {
+      const context = this;
+      if (!timer) {
+        timer = setTimeout(function () {
+          fun.apply(context, args);
+          clearTimeout(timer);
+          timer = null;
+        }, delay);
+      }
+    };
+  },
+  /**
+   * 字母大小写切换
+   * @param str 要处理的字符串
+   * @param type 1:首字母大写 2：首页母小写 3：大小写转换 4：全部大写 5：全部小写
+   */
+  strChangeCase(str: string, type: 1 | 2 | 3 | 4 | 5) {
+    function ToggleCase(str: string) {
+      let itemText = '';
+      str.split('').forEach(function (item) {
+        if (/^([a-z]+)/.test(item)) {
+          itemText += item.toUpperCase();
+        } else if (/^([A-Z]+)/.test(item)) {
+          itemText += item.toLowerCase();
+        } else {
+          itemText += item;
+        }
+      });
+      return itemText;
+    }
+
+    switch (type) {
+      case 1:
+        return str.replace(/^(\w)(\w+)/, function (v, v1, v2) {
+          v = v1.toUpperCase() + v2.toLowerCase();
+          return v;
+        });
+      case 2:
+        return str.replace(/^(\w)(\w+)/, function (v, v1, v2) {
+          v = v1.toLowerCase() + v2.toUpperCase();
+          return v;
+        });
+      case 3:
+        return ToggleCase(str);
+      case 4:
+        return str.toUpperCase();
+      case 5:
+        return str.toLowerCase();
+      default:
+        return str;
+    }
+  },
+  /**
+   * 检测密码强度
+   * @param str 字符串
+   * @returns 1：密码弱 2：密码中等 3：密码强 4：密码很强
+   */
+  checkPwd(str: string) {
+    let nowLv = 0;
+    if (str.length < 6) {
+      return nowLv;
+    }
+    if (/[0-9]/.test(str)) {
+      nowLv++;
+    }
+    if (/[a-z]/.test(str)) {
+      nowLv++;
+    }
+    if (/[A-Z]/.test(str)) {
+      nowLv++;
+    }
+    return nowLv;
+  },
+  /**
+   * 浏览器全屏
+   * @param eleId 需要全屏的元素，不传则全屏整个屏幕
+   */
+  reqFullScreen(eleId?: string) {
+    const docElm: any =
+      eleId && eleId.length > 0 ? document.getElementById(eleId) : document.documentElement;
+    if (docElm.requestFullScreen) {
+      docElm.requestFullScreen();
+    } else if (docElm.webkitRequestFullScreen) {
+      docElm.webkitRequestFullScreen();
+    } else if (docElm.mozRequestFullScreen) {
+      docElm.mozRequestFullScreen();
+    }
+  },
+  /**
+   * 浏览器退出全屏
+   */
+  exitFullScreen(eleId?: string) {
+    const docElm: any =
+      eleId && eleId.length > 0 ? document.getElementById(eleId) : document.documentElement;
+    const doc: any = document;
+    if (docElm.requestFullScreen) {
+      doc.exitFullScreen();
+    } else if (docElm.webkitRequestFullScreen) {
+      doc.webkitCancelFullScreen();
+    } else if (docElm.mozRequestFullScreen) {
+      doc.mozCancelFullScreen();
+    }
+  },
+  /**
+   * 随机产生某个颜色
+   * @returns 颜色 例：rgb(250,82,49)
+   */
+  randomColor() {
+    return (
+      'rgb(' +
+      Math.round(Math.random() * 255) +
+      ',' +
+      Math.round(Math.random() * 255) +
+      ',' +
+      Math.round(Math.random() * 255) +
+      ')'
+    );
+  },
+  /**
+   * 生成随机数{min~max:随机数范围，min必须小于max并且不能相等，fixed：保留几位小数}
+   * @param min 范围最小值
+   * @param max 范围最大值
+   * @param fixed 保留几位小数
+   */
+  numberRandom(min: number, max: number, fixed = 0) {
+    if (min > max || min === max) {
+      throw new Error('请输入正确区间数字，min必须小于max');
+    }
+
+    const factor = Math.pow(10, fixed);
+    return Math.floor(Math.random() * (max * factor - min * factor + 1) + min * factor) / factor;
+  },
+  /*
+   *数字每千位加逗号
+   */
+  formatNumberWithCommas(num: number) {
+    return num.toString().replace(/\d+/, function (s) {
+      return s.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    });
   }
 };
