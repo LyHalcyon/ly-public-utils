@@ -1,5 +1,9 @@
 # ly-public-utils
 
+[npm地址](https://www.npmjs.com/package/ly-public-utils)<br />
+
+安装命令 `npm i ly-public-utils` 或 `yarn add ly-public-utils`
+
 自用工具包，提供一些常用的工具方法。<br />
 `formatDate` 格式化时间<br />
 例：
