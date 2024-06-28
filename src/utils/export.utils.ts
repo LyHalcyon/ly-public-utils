@@ -7,7 +7,6 @@ import FileSaver from 'file-saver';
  * @param {string} fileName - 导出的Excel文件名称  例：'集团数据'
  */
 export function exportExcel(elementId: string, fileName: string) {
-  console.log('导出Excel');
   const tableElement = document.querySelector(`#${elementId}`);
 
   if (!tableElement) {
