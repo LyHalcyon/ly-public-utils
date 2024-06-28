@@ -7,7 +7,7 @@ export default defineConfig({
     target: 'es2020',
     lib: {
       entry: 'src/index.ts', // 入口文件路径
-      formats: ['es', 'cjs'],
+      formats: ['es'],
       name: 'ly-public-utils',
       fileName: 'index'
     }

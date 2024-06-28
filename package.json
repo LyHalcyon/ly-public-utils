@@ -1,29 +1,26 @@
 {
   "name": "ly-public-utils",
   "private": false,
-  "version": "0.0.26",
+  "version": "0.0.27",
   "author": "LyHalcyon",
   "type": "module",
   "types": "dist/index.d.ts",
-  "main": "dist/index.min.cjs",
-  "module": "dist/index.min.js",
+  "module": "dist/index.js",
   "files": [
     "dist/utils",
     "dist/index.d.ts",
-    "dist/index.min.js",
-    "dist/index.min.cjs",
+    "dist/index.js",
     "README.md"
   ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     }
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc -p tsconfig.build.json && terser dist/index.js -o dist/index.min.js -c -m && terser dist/index.cjs -o dist/index.min.cjs -c -m",
+    "build": "vite build && tsc -p tsconfig.build.json && terser dist/index.js -c -m -o dist/index.js",
     "preview": "vite preview"
   },
   "devDependencies": {
