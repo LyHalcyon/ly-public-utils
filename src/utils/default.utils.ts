@@ -647,6 +647,32 @@ const defaultUtils = {
    */
   isExcel(fileName: string) {
     return checkFileName(fileName, ['xlsx', 'xls', 'xlsm', 'xlsb', 'csv']);
+  },
+  /**
+   * 获取一个随机的UUID
+   */
+  getUUID() {
+    const timestamp = Date.now().toString(16); // 当前时间戳的十六进制表示
+    const randomSegment = () =>
+      Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+
+    return (
+      timestamp.substring(0, 8) +
+      '-' +
+      randomSegment() +
+      '-' +
+      '4' +
+      randomSegment().substring(0, 3) +
+      '-' + // 确保第13位为4
+      (8 + Math.floor(Math.random() * 4)).toString(16) +
+      randomSegment().substring(0, 3) +
+      '-' + // 确保第17位为8, 9, a, 或 b
+      randomSegment() +
+      randomSegment() +
+      randomSegment()
+    );
   }
 };
 /**

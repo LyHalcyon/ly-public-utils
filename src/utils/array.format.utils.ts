@@ -69,8 +69,8 @@ export function flattenArray(arr: any[], unique: boolean = false): any[] {
 }
 
 /**
- * 构建树形结构的数组对象
- * @param data 原始数据数组
+ * 扁平化数组数据构建树形结构的数组对象
+ * @param data 原始扁平化数组数据
  * @param parentIdKey 父节点关联字段名
  * @param isReturnJson 是否返回JSON字符串,默认不返回
  * @returns 树形结构的数组对象或者JSON字符串
