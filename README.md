@@ -65,7 +65,7 @@ import { flattenArray } from 'ly-public-utils';
 flattenArray([1, 2, 3, [2, 5], 6, [7, 8, [9, 10]]]) //[1, 2, 3, 2, 5, 6, 7, 8, 9, 10]
 ```
 
-`buildTree` 构建树形结构的数组对象<br />
+`buildTree` 扁平化数组数据构建树形结构的数组对象<br />
 例：
 
 ```javascript
@@ -81,4 +81,26 @@ const jsonData: any[] = [
 ];
 const treeData = buildTree(jsonData, 'parent_id');
 treeData// [{id: 1, name: 'Node 1', children: [{id: 2, name: 'Node 2', children: [{id: 4, name: 'Node 4'}, {id: 5, name: 'Node 5'}]}, {id: 3, name: 'Node 3', children: []}]}]
+```
+
+`cutArray` 数组按size分组<br />
+例：
+
+```javascript
+import { cutArray } from 'ly-public-utils';
+// 使用示例
+const arrData: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const resData = cutArray(arrData, 3);
+resData// [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]
+```
+
+`generateCombinations` 生成数组的排列组合<br />
+例：
+
+```javascript
+import { generateCombinations } from 'ly-public-utils';
+// 使用示例
+const arrData: any[] = [[1, 2], [3, 4]]
+const resData = generateCombinations(arrData);
+resData// [[1, 3], [1, 4], [2, 3], [2, 4]]
 ```

@@ -614,6 +614,54 @@ const defaultUtils = {
     });
   },
   /**
+   * 数字转中文
+   * @param num 数字
+   * @param upperOrLower 'lower'：小写中文数字，'upper'：大写中文数字
+   */
+  formatNumberToChinese(num: number, upperOrLower: 'lower' | 'upper' = 'lower') {
+    // 定义小写中文数字和单位
+    let chineseNumbers = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+    let chineseUnits = ['', '十', '百', '千', '万', '十', '百', '千', '亿'];
+
+    // 如果需要大写中文数字和单位
+    if (upperOrLower === 'upper') {
+      chineseNumbers = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+      chineseUnits = ['', '拾', '佰', '仟', '万', '拾', '佰', '仟', '亿'];
+    }
+
+    // 将数字转换为字符串，并分离整数部分和小数部分
+    let numberString = num.toString();
+    let [integerPart, decimalPart] = numberString.split('.');
+    let integerArray = integerPart.split('').map(Number);
+
+    // 构建整数部分的中文表示
+    let chineseInteger = '';
+    for (let i = 0; i < integerArray.length; i++) {
+      let digit = integerArray[i];
+      let unit = chineseUnits[integerArray.length - i - 1];
+      if (digit === 0) {
+        if (i !== integerArray.length - 1 && integerArray[i + 1] !== 0) {
+          chineseInteger += chineseNumbers[digit];
+        }
+      } else {
+        chineseInteger += chineseNumbers[digit] + unit;
+      }
+    }
+
+    // 构建小数部分的中文表示
+    let chineseDecimal = '';
+    if (decimalPart) {
+      let decimalArray = decimalPart.split('').map(Number);
+      for (let i = 0; i < decimalArray.length; i++) {
+        chineseDecimal += chineseNumbers[decimalArray[i]];
+      }
+    }
+
+    // 拼接整数部分和小数部分的中文表示，并返回结果
+    let result = chineseInteger + (decimalPart ? '点' + chineseDecimal : '');
+    return result || '零';
+  },
+  /**
    * 检测文件名是否为图片
    * @param fileName
    */
