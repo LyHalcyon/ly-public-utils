@@ -565,9 +565,8 @@ const defaultUtils = {
   /**
    * 浏览器退出全屏
    */
-  exitFullScreen(eleId?: string) {
-    const docElm: any =
-      eleId && eleId.length > 0 ? document.getElementById(eleId) : document.documentElement;
+  exitFullScreen() {
+    const docElm: any = document.documentElement;
     const doc: any = document;
     if (docElm.requestFullScreen) {
       doc.exitFullScreen();
