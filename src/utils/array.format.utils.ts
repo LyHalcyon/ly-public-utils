@@ -100,3 +100,40 @@ export function buildTree(data: any[], parentIdKey: string, isReturnJson = false
 
   return isReturnJson ? JSON.stringify(tree, null, 2) : tree;
 }
+
+/**
+ * 数组按size分组
+ * @param arr
+ * @param size
+ */
+export function cutArray(arr: [], size: number) {
+  let result = [];
+  for (let i = 0; i < arr.length; i += size) {
+    result.push(arr.slice(i, i + size));
+  }
+  return result;
+}
+
+/**
+ * 生成数组的排列组合
+ * @param arr 原始数组（多维数组） 例：[[1, 2], [3, 4]] 或 [[1, 2], [3, 4],[5, 6]...]
+ */
+export function generateCombinations(arr: any[][]): any[][] {
+  const totalArr: any[][] = []; // 总数组
+  const tmp: any[] = []; // 临时数组，用于存储当前组合
+
+  function generateCombinationsCallback(subArr: any[], currIndex: number) {
+    if (currIndex === arr.length) {
+      totalArr.push([...tmp]);
+      return;
+    }
+
+    for (const val of subArr) {
+      tmp[currIndex] = val; // 以currIndex为索引，加入临时数组
+      generateCombinationsCallback(arr[currIndex + 1] || [], currIndex + 1); // 继续递归调用处理下一层
+    }
+  }
+
+  generateCombinationsCallback(arr[0], 0); // 从第一个数组开始处理
+  return totalArr;
+}
