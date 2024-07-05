@@ -4,7 +4,8 @@ import localStorage from './utils/local.cache.utils';
 import defaultUtils from './utils/default.utils';
 import { deepCopy, flattenArray, buildTree } from './utils/array.format.utils';
 import { exportExcel } from './utils/export.utils';
-
+import bus from './utils/bus.utils';
+ 
 export {
   formatDate,
   Base64,
@@ -13,5 +14,6 @@ export {
   deepCopy,
   flattenArray,
   buildTree,
-  exportExcel
+  exportExcel,
+  bus
 };

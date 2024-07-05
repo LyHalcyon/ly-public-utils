@@ -1,7 +1,7 @@
 {
   "name": "ly-public-utils",
   "private": false,
-  "version": "0.0.28",
+  "version": "0.0.29",
   "author": "LyHalcyon",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -41,7 +41,9 @@
     "formatDate",
     "localStorage",
     "base64",
-    "defaultUtils"
+    "defaultUtils",
+    "bus",
+    "mitt"
   ],
   "license": "MIT",
   "homepage": "https://github.com/LyHalcyon/ly-public-utils",
@@ -52,6 +54,7 @@
   "dependencies": {
     "@types/file-saver": "^2.0.7",
     "file-saver": "^2.0.5",
+    "mitt": "^3.0.1",
     "xlsx": "^0.18.5"
   }
 }

@@ -456,3 +456,24 @@ import { exportExcel } from 'ly-public-utils';
 // 使用示例
 exportExcel('my-table', '集团数据');
 ```
+
+`bus` 跨组件事件总线->`mitt`<br />
+例：
+
+```javascript
+import { bus } from 'ly-public-utils';
+// 触发事件
+bus.emit('myEvent', { message: 'Hello from Component A' });
+```
+
+```javascript
+import { bus } from 'ly-public-utils';
+// 触发事件
+bus.on('myEvent', (data) => {
+  console.log(data.message); // 输出: Hello from Component A
+});
+//组件销毁时清理监听器->避免内存泄漏
+onUnmounted(() => {
+  bus.off('myEvent', handler);
+});
+```
