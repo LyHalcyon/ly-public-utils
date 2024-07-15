@@ -6,6 +6,8 @@
 
 安装命令 `npm i ly-public-utils` 或 `yarn add ly-public-utils`
 
+**这个工具类写的有点乱，有兴趣可以看看新写的这个`ly-ts-utils`**[npm地址](https://www.npmjs.com/package/ly-ts-utils)<br />
+
 `formatDate` 格式化时间<br />
 例：
 
